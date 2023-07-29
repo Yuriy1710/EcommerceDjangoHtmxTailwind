@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="flex flex-wrap items-start max-w-6xl px-6 py-6 mx-auto xl:px-0">
+  <div class="w-full filters lg:w-1/4">
+    <h3 class="mb-3 text-xl uppercase">Search</h3>
+
+    <form method="get" action=".">
+      <div class="flex">
+        <input type="text" name="query" class="px-4 bg-gray-100 rounded-md outline-none" placeholder="Search ...">
+        <button class="p-4 bg-gray-100 outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>                   
+        </button>
+      </div>
+    </form>
+
+    <h3 class="mt-6 mb-3 text-3xl uppercase">Categories</h3>
+    <ul class="space-y-2">
+      <li><a href="{% url 'shop' %}" class="{% if not active_category %}text-purple-500 {% else %} text-gray-500 {% endif %}">All categories</a></li>
+      {% for category in categories %}
+        <li class="list-disc list-inside hover:list-none"><a href="{% url 'shop' %}?category={{ category.slug }}" class="{% if category.slug == active_category %}text-purple-500 {% else %} text-gray-500 {% endif %}">{{ category.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+  <div class="flex flex-wrap items-center w-full -mt-4 lg:w-3/4 products">
+    {% for product in products %}
+      {% include 'partials/product-list-item.html' %}
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
+
+
+
