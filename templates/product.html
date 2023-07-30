@@ -10,11 +10,19 @@
   </div>
 
   <div class="w-full information lg:w-2/5 lg:p-6">
-    <h1 class="text-2xl">Product name</h1>
-    <p class="mt-1 text-gray-400">$9.99</p>
-    <p class="mt-6 text-gray-700">You can also use variant modifiers to target media queries like responsive breakpoints, dark mode, prefers-reduced-motion, and more. For example, use md:top-6 to apply the top-6 utility at only medium screen sizes and above.</p>
+    <h1 class="text-2xl">{{ product.name }}</h1>
+    <p class="mt-1 text-gray-400">{{ product.price }}</p>
 
-    <a href="#" class="inline-block px-8 py-4 mt-6 text-white bg-purple-500 rounded-lg hover:bg-purple-700">
+    {% if product.description %}
+      <p class="mt-6 text-gray-700">{{ product.description }}</p>
+    {% endif %}
+
+    <a 
+      hx-get="{% url 'add_to_cart' product.id %}"
+      hx-target="#menu-cart-button"
+      hx-swap="outerHTML"
+      href="#" 
+      class="inline-block px-8 py-4 mt-6 text-white bg-purple-500 rounded-lg hover:bg-purple-700">
       Add to card
     </a>
   </div>
