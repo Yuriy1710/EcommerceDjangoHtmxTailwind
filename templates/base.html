@@ -11,8 +11,8 @@
 </head>
 
 <body
-  class="flex flex-col h-screen"
-  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'">
+  class="flex flex-col h-screen">
+  {% comment %} hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'"> {% endcomment %}
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Asap+Condensed:ital@0;1&family=Inter&family=Josefin+Sans:ital@0;1&family=Montserrat:ital@0;1&family=Poppins:ital@0;1&family=Raleway:ital@0;1&family=Roboto:ital@0;1&display=swap');
@@ -30,7 +30,11 @@
 
  <div class="sticky top-[100vh]">
   {% include 'partials/footer.html' %}
-</div>
+  </div>
+
+
+  {% block script %}
+  {% endblock script %}
 
 </body>
 </html>
