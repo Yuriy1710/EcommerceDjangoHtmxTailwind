@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecommerce</title>
+  <title>{% block title %}{% endblock title %} | Online Learning</title>
 
   <script src="https://unpkg.com/htmx.org@1.9.3" integrity="sha384-lVb3Rd/Ca0AxaoZg5sACe8FJKF0tnUgR2Kd7ehUOG5GCcROv5uBIZsOqovBAcWua" crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script> 
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'">
+<body
+  class="flex flex-col h-screen"
+  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Asap+Condensed:ital@0;1&family=Inter&family=Josefin+Sans:ital@0;1&family=Montserrat:ital@0;1&family=Poppins:ital@0;1&family=Raleway:ital@0;1&family=Roboto:ital@0;1&display=swap');
+    body {
+      font-family: 'Poppins';
+    }
+  </style>
 
   {% include 'partials/navbar.html' %}
 
@@ -19,7 +28,9 @@
     {% endblock content %}
   </main>
 
+ <div class="sticky top-[100vh]">
   {% include 'partials/footer.html' %}
+</div>
 
 </body>
 </html>

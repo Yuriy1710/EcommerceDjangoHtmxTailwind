@@ -1,14 +1,40 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from product.models import *
+from .forms import SignupForm
 
 
 def signup(request):
-    return render(request, 'signup.html')
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()           
+            login(request, user)
+            return redirect('/')
+    else:
+        form = SignupForm()
+    
+    return render(request, 'signup.html', {'form': form})
 
 
-def login(request):
-    return render(request, 'login.html')
+@login_required
+def my_account(request):
+    return render(request, 'my-account.html')
+
+@login_required
+def edit_my_account(request):
+    if request.method == 'POST':
+        user = request.user
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.username = request.POST.get('username')
+        user.email = request.POST.get('email')
+        user.save()
+        
+        return redirect('my_account')   
+    return render(request, 'edit-my-account.html')
 
 
 def frontpage(request):
