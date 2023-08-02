@@ -1,0 +1,36 @@
+
+<div class="flex pr-6 mb-6 product" id="cart-item-{{ item.product.id }}">
+  <a href="#" class="w-1/4">
+    <img src="{{ item.product.get_thumbnail }}" class="hover:shadow-lg rounded-xl" alt="">
+  </a>
+
+  <div class="w-3/4 pl-6">
+    <div class="flex justify-between">
+      <a href="#" class="text-lg">{{ item.product.name }}</a>
+      <span class="pt-1 mb-6 text-gray-400">{{ item.total_price }}</span>
+    </div>
+
+    <hr>
+
+    {% if item %}
+
+    <div class="flex items-center mt-6 space-x-4 quantity">
+      <a
+        hx-get="{% url 'update_cart' item.product.id 'decrement' %}"
+        hx-target="#cart-item-{{ item.product.id }}"
+        hx-swap="outerHTML"
+        class="p-3 bg-gray-100 cursor-pointer">
+      -</a>
+      <span>{{ item.quantity }}</span>
+      <a
+        hx-get="{% url 'update_cart' item.product.id 'increment' %}"
+        hx-target="#cart-item-{{ item.product.id }}"
+        hx-swap="outerHTML"
+        class="p-3 bg-gray-100 cursor-pointer">
+      +</a>
+    </div>
+
+    {% endif %}
+  </div>
+</div>
+

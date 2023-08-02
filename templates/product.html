@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}{{ product.name }}{% endblock title %}
+
 {% block content %}
 
 
 <div class="flex flex-wrap max-w-6xl px-6 py-6 mx-auto xl:px-0">
   <div class="w-full p-6 mb-6 images lg:mb-0 lg:w-3/5">
-    <img src="{% static 'images/1.jpg' %}" alt="" class="rounded-xl hover:shadow-lg">
+    <img 
+      src="{% if product.image %} {{ product.image.url }} {% else %} 'http://via.placeholder.com/240x240.jpg' {% endif %}" 
+      class="rounded-xl hover:shadow-lg"
+    >
   </div>
 
   <div class="w-full information lg:w-2/5 lg:p-6">
